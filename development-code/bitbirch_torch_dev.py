@@ -179,9 +179,9 @@ def _split_node(node, threshold, branching_factor):
     new_subcluster2: _BFSubcluster
         New subcluster
     """
-    new_subcluster1 = _CFSubcluster(n_features = node.n_features, device=node.device)           #check with other sized data to make sure this works
-    new_subcluster2 = _CFSubcluster(n_features = node.n_features, device=node.device)
-    new_node1 = _CFNode(
+    new_subcluster1 = _BFSubcluster(n_features = node.n_features, device=node.device)           #check with other sized data to make sure this works
+    new_subcluster2 = _BFSubcluster(n_features = node.n_features, device=node.device)
+    new_node1 = _BFNode(
         threshold=threshold,
         branching_factor=branching_factor,
         is_leaf=node.is_leaf,
@@ -189,7 +189,7 @@ def _split_node(node, threshold, branching_factor):
         dtype=node.init_centroids_.dtype,
         device=node.device,
     )
-    new_node2 = _CFNode(
+    new_node2 = _BFNode(
         threshold=threshold,
         branching_factor=branching_factor,
         is_leaf=node.is_leaf,
@@ -227,7 +227,7 @@ def _split_node(node, threshold, branching_factor):
             new_subcluster2.update(subcluster)
     return new_subcluster1, new_subcluster2
 
-class _CFNode:
+class _BFNode:
     """Each node in a BFTree is called a BFNode.
 
     The BFNode can have a maximum of branching_factor
@@ -302,7 +302,7 @@ class _CFNode:
         self.centroids_[ind] = new_subcluster1.centroid_
         self.append_subcluster(new_subcluster2)
 
-    def insert_cf_subcluster(self, subcluster, set_bits):
+    def insert_bf_subcluster(self, subcluster, set_bits):
         """Insert a new subcluster into the node."""
         if not self.subclusters_:
             self.append_subcluster(subcluster)
@@ -317,7 +317,7 @@ class _CFNode:
 
         # If the subcluster has a child, we need a recursive strategy.
         if closest_subcluster.child_ is not None:
-            split_child = closest_subcluster.child_.insert_cf_subcluster(subcluster, set_bits)
+            split_child = closest_subcluster.child_.insert_bf_subcluster(subcluster, set_bits)
 
             if not split_child:
                 # If it is determined that the child need not be split, we
@@ -365,7 +365,7 @@ class _CFNode:
                 return True
 
 
-class _CFSubcluster:
+class _BFSubcluster:
     """Each subcluster in a BFNode is called a BFSubcluster.
 
     A BFSubcluster can have a BFNode as its child.
@@ -393,14 +393,14 @@ class _CFSubcluster:
 
     centroid_ : ndarray of shape (branching_factor + 1, n_features)
         Centroid of the subcluster. Prevent recomputing of centroids when
-        ``CFNode.centroids_`` is called.
+        ``BFNode.centroids_`` is called.
 
     mol_indices : list, default=[]
         List of indices of molecules included in the subclustergiven cluster.
 
-    child_ : _CFNode
-        Child Node of the subcluster. Once a given _CFNode is set as the child
-        of the _CFNode, it is set to ``self.child_``.
+    child_ : _BFNode
+        Child Node of the subcluster. Once a given _BFNode is set as the child
+        of the _BFNode, it is set to ``self.child_``.
     """
 
     def __init__(self, *, linear_sum=None, mol_indices=None, n_features=2048, device):    
@@ -449,7 +449,7 @@ class _CFSubcluster:
             return True
         return False
 
-class Birch():
+class BitBirch():
     """Implements the BitBIRCH clustering algorithm.
 
     BitBIRCH paper: 
@@ -541,7 +541,7 @@ class Birch():
         # start a new tree.
         if self.first_call:
             # The first root is the leaf. Manipulate this object throughout.
-            self.root_ = _CFNode(
+            self.root_ = _BFNode(
                 threshold=threshold,
                 branching_factor=branching_factor,
                 is_leaf=True,
@@ -551,7 +551,7 @@ class Birch():
             )
         
             # To enable getting back subclusters.
-            self.dummy_leaf_ = _CFNode(
+            self.dummy_leaf_ = _BFNode(
                 threshold=threshold,
                 branching_factor=branching_factor,
                 is_leaf=True,
@@ -570,15 +570,15 @@ class Birch():
 
         for sample in iter_func(X):
             set_bits = torch.sum(sample)
-            subcluster = _CFSubcluster(linear_sum=sample, mol_indices=[self.index_tracker], device=sample.device)
-            split = self.root_.insert_cf_subcluster(subcluster, set_bits)
+            subcluster = _BFSubcluster(linear_sum=sample, mol_indices=[self.index_tracker], device=sample.device)
+            split = self.root_.insert_bf_subcluster(subcluster, set_bits)
 
             if split:
                 new_subcluster1, new_subcluster2 = _split_node(
                     self.root_, threshold, branching_factor,
                 )
                 del self.root_
-                self.root_ = _CFNode(
+                self.root_ = _BFNode(
                     threshold=threshold,
                     branching_factor=branching_factor,
                     is_leaf=False,

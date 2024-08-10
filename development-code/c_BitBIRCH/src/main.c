@@ -1,4 +1,9 @@
-/* BitBIRCH is an open-source clustering module based on iSIM
+/* 
+ Part of the tree-management code was derived from https://github.com/douglas444/birch
+ Author: Douglas Monteiro <douglas.m.cavalcanti@gmail.com>
+
+ 
+ BitBIRCH is an open-source clustering module based on iSIM
 
  BitBIRCH is free software; you can redistribute it and/or modify
  it under the terms of the GNU Lesser General Public License as published by
@@ -10,7 +15,7 @@
  GNU Lesser General Public License for more details.
 
  BitBIRCH authors (C): Vicky (Vic) Jung <jungvicky@ufl.edu>
-                                       Ramon Alain Miranda Quintana <ramirandaq@gmail.com>, <quintana@chem.ufl.edu>
+                       Ramon Alain Miranda Quintana <ramirandaq@gmail.com>, <quintana@chem.ufl.edu>
 
  BitBIRCH License: LGPL-3.0 https://www.gnu.org/licenses/lgpl-3.0.en.html#license-text
 
@@ -135,9 +140,6 @@ int main(int argc, char* argv[])
     BFTree* tree = tree_create(dimensionality, branching_factor, threshold, distance, apply_merging_refinement == 1);
     Array* instances_indexes = array_create(1);
 
-    clock_t start;
-    start=clock();
-
     do {
 
         double* instance = instance_read(line, dimensionality, delimiters);
@@ -149,10 +151,8 @@ int main(int argc, char* argv[])
 
     } while(fgets(line, 1024, stream));
     
-    float time=(clock()-start) /(float) CLOCKS_PER_SEC;
     char buf[100];
 
-    printf("time %f",(float)time);
     printf("done");
     
     fclose(stream);

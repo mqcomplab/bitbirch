@@ -435,10 +435,6 @@ class BitBirch():
     subcluster_centers_ : ndarray
         Centroids of all subclusters read directly from the leaves.
 
-    subcluster_labels_ : ndarray
-        Labels assigned to the centroids of the subclusters after
-        they are clustered globally.
-
     Notes
     -----
     The tree data structure consists of nodes with each node consisting of

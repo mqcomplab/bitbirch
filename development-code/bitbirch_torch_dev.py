@@ -1,3 +1,29 @@
+# BitBIRCH is an open-source clustering module based on iSIM
+#
+# Please, cite the BitBIRCH paper:
+#
+# BitBIRCH is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, version 3.
+#
+# BitBIRCH is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# BitBIRCH authors (PYTHORCH): Ramon Alain Miranda Quintana <ramirandaq@gmail.com>, <quintana@chem.ufl.edu>
+#                            Kate Huddleston <kdavis2@chem.ufl.edu>
+#                            Vicky (Vic) Jung <jungvicky@ufl.edu>
+#                            Kenneth Lopez Perez <klopezperez@chem.ufl.edu>
+#
+# BitBIRCH License: LGPL-3.0 https://www.gnu.org/licenses/lgpl-3.0.en.html#license-text
+#
+### Part of the tree-management code was derived from https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html
+### Authors: Manoj Kumar <manojkumarsivaraj334@gmail.com>
+###          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
+###          Joel Nothman <joel.nothman@gmail.com>
+### License: BSD 3 clause
+
 import torch
 from scipy import sparse
 

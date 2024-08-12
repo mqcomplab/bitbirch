@@ -18,7 +18,7 @@
 #
 # BitBIRCH License: LGPL-3.0 https://www.gnu.org/licenses/lgpl-3.0.en.html#license-text
 #
-# Please, cite the BitBIRCH paper: 
+# Please, cite the BitBIRCH paper: https://www.biorxiv.org/content/10.1101/2024.08.10.607459v1
 #
 ### Part of the tree-management code was derived from https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html
 ### Authors: Manoj Kumar <manojkumarsivaraj334@gmail.com>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20240404-1353-Experimental"
+	Name="Kellys_PC"
+	Generator="ctest-3.27.7"
+	CompilerName="C:/msys64/mingw64/bin/g++.exe"
+	CompilerVersion="13.2.0"
+	OSName="Windows"
+	Hostname="Kellys_PC"
+	OSRelease=" Personal"
+	OSVersion=" (Build 22631)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="8"
+	ProcessorCacheSize="64"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="18141"
+	TotalPhysicalMemory="15709"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1796"
+	>
+	<Testing>
+		<StartDateTime>Apr 04 10:20 Eastern Daylight Time</StartDateTime>
+		<StartTestTime>1712240428</StartTestTime>
+		<TestList/>
+		<EndDateTime>Apr 04 10:20 Eastern Daylight Time</EndDateTime>
+		<EndTestTime>1712240428</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

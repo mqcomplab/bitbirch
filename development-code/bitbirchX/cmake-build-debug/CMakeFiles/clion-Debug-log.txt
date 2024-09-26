@@ -1,0 +1,22 @@
+"C:\Program Files\JetBrains\CLion 2022.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3/bin/ninja/win/ninja.exe" -G Ninja -S C:\Users\Kelly\Projects\bitbirchX -B C:\Users\Kelly\Projects\bitbirchX\cmake-build-debug
+CMake Error at C:/Program Files/JetBrains/CLion 2022.3/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake:47 (find_package):
+  By not providing "Findxtl.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "xtl", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "xtl" (requested
+  version 0.7.5) with any of the following names:
+
+    xtlConfig.cmake
+    xtl-config.cmake
+
+  Add the installation prefix of "xtl" to CMAKE_PREFIX_PATH or set "xtl_DIR"
+  to a directory containing one of the above files.  If "xtl" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  C:/Users/Kelly/mambaforge/Library/share/cmake/xtensor/xtensorConfig.cmake:44 (find_dependency)
+  CMakeLists.txt:14 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/Kelly/Projects/bitbirchX/cmake-build-debug/CMakeFiles/CMakeOutput.log".

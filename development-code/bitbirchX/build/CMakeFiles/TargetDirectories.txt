@@ -1,0 +1,5 @@
+C:/Users/Kelly/Projects/bitbirchX/build/CMakeFiles/bitbirchX.dir
+C:/Users/Kelly/Projects/bitbirchX/build/CMakeFiles/package.dir
+C:/Users/Kelly/Projects/bitbirchX/build/CMakeFiles/package_source.dir
+C:/Users/Kelly/Projects/bitbirchX/build/CMakeFiles/edit_cache.dir
+C:/Users/Kelly/Projects/bitbirchX/build/CMakeFiles/rebuild_cache.dir

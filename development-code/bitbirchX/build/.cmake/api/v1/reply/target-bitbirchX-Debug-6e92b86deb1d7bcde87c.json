@@ -14,11 +14,14 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries"
+			"target_link_libraries",
+			"find_package",
+			"target_include_directories"
 		],
 		"files" : 
 		[
-			"CMakeLists.txt"
+			"CMakeLists.txt",
+			"C:/Users/Kelly/mambaforge/Library/lib/cmake/xtensor-blas/xtensor-blasConfig.cmake"
 		],
 		"nodes" : 
 		[
@@ -28,19 +31,41 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 30,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 49,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 36,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 37,
+				"line" : 18,
 				"parent" : 0
 			}
 		]
@@ -52,16 +77,20 @@
 			[
 				{
 					"fragment" : "-g"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-march=native"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 5,
+					"path" : "C:/Users/Kelly/mambaforge/Library/include/xtensor"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "C:/Users/Kelly/mambaforge/Library/include/xtensor-blas"
+				},
+				{
+					"backtrace" : 7,
 					"isSystem" : true,
 					"path" : "C:/Users/Kelly/mambaforge/Library/include"
 				}
@@ -85,6 +114,11 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "C:\\msys64\\mingw64\\lib\\libopenblas.dll.a",
+				"role" : "libraries"
 			},
 			{
 				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",

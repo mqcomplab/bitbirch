@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Kelly\Projects\bitbirchX
+CMAKE_SOURCE_DIR = C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Kelly\Projects\bitbirchX\build
+CMAKE_BINARY_DIR = C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\build
 
 # Utility rule file for ExperimentalBuild.
 
@@ -81,6 +81,6 @@ CMakeFiles/ExperimentalBuild.dir/clean:
 .PHONY : CMakeFiles/ExperimentalBuild.dir/clean
 
 CMakeFiles/ExperimentalBuild.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Kelly\Projects\bitbirchX C:\Users\Kelly\Projects\bitbirchX C:\Users\Kelly\Projects\bitbirchX\build C:\Users\Kelly\Projects\bitbirchX\build C:\Users\Kelly\Projects\bitbirchX\build\CMakeFiles\ExperimentalBuild.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\build C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\build C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\build\CMakeFiles\ExperimentalBuild.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/ExperimentalBuild.dir/depend
 

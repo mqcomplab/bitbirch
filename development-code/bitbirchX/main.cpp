@@ -6,7 +6,7 @@
 int main() {
     // Simple example running random sets with 1000 to 50000 molecules
     std::string z;
-    for (int n = 1000; n < 30001; n += 1000) {
+    for (int n = 1000; n < 2001; n += 1000) {
         std::cout << n << std::endl;
         auto dat = xt::random::randint<int>({n, 100}, 0, 2);
         auto brc = Birch(0.50, 50, NULL);
@@ -14,6 +14,11 @@ int main() {
         auto v = std::chrono::high_resolution_clock::now();
         brc.fit(dat);
         auto leaves = brc._get_leaves();
+        // for (_CFNode* leave : leaves) {
+        //     for (_CFSubcluster* subcluster : leave->subclusters_) {
+        //         std::cout << subcluster->mol_indices.size() << std::endl;
+        //     }
+        // }
         std::ostringstream oss;
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> time = end - v;
@@ -21,14 +26,14 @@ int main() {
         z += oss.str();
     }
 
-    std::ofstream outfile("jt_fit_label.txt");
-    if(outfile.is_open()) {
-        outfile << z;
-        outfile.close();
-    }
-    else {
-        std::cout << "Unable to open file" << std::endl;
-    }
+    // std::ofstream outfile("jt_fit_label.txt");
+    // if(outfile.is_open()) {
+    //     outfile << z;
+    //     outfile.close();
+    // }
+    // else {
+    //     std::cout << "Unable to open file" << std::endl;
+    // }
 
     // xt::xarray<double> arr1
     //   {{1.0, 2.0, 3.0},

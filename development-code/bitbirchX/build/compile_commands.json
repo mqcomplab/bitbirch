@@ -1,8 +1,8 @@
 [
 {
-  "directory": "C:/Users/Kelly/Projects/bitbirchX/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/bitbirchX.dir/includes_CXX.rsp -g -march=native -o CMakeFiles\\bitbirchX.dir\\main.cpp.obj -c C:\\Users\\Kelly\\Projects\\bitbirchX\\main.cpp",
-  "file": "C:/Users/Kelly/Projects/bitbirchX/main.cpp",
+  "directory": "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/bitbirchX.dir/includes_CXX.rsp -g -o CMakeFiles\\bitbirchX.dir\\main.cpp.obj -c C:\\Users\\Kelly\\Projects\\bitbirch\\development-code\\bitbirchX\\main.cpp",
+  "file": "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/main.cpp",
   "output": "CMakeFiles/bitbirchX.dir/main.cpp.obj"
 }
 ]

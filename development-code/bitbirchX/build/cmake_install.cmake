@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Kelly/Projects/bitbirchX
+# Install script for directory: C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Kelly/Projects/bitbirchX/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -5,8 +5,7 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/**",
-                "C:\\Users\\Kelly\\mambaforge\\Library\\include",
-                "C:\\Users\\Kelly\\mambaforge\\Library\\include\\xtensor"
+                "C:\\Users\\Kelly\\mambaforge\\Library\\include"
             ],
             "defines": [
                 "_DEBUG",

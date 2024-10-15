@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/Kelly/Projects/bitbirchX
-BuildDirectory: C:/Users/Kelly/Projects/bitbirchX/build
+SourceDirectory: C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX
+BuildDirectory: C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/Kelly/Projects/bitbirchX"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX"
 MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

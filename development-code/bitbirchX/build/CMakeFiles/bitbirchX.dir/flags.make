@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/bitbirchX.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -march=native
+CXX_FLAGS = -g
 

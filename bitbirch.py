@@ -562,7 +562,7 @@ class BitBirch():
         return leaves
     
     def get_centroids(self):
-        """Method to return the indices of molecules in each cluster"""
+        """Method to return a list of Numpy arrays containing the centroids' fingerprints"""
         if self.first_call:
             raise ValueError('The model has not been fitted yet.')
         

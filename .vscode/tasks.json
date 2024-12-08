@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+				"-g",
+                "-I", "C:\\Users\\Kelly\\mambaforge\\Library\\include",
+                "-o", "main",
+                "development-code/bitbirchX/main.cpp",
+                "development-code/bitbirchX/_CFNode.cpp",
+                "development-code/bitbirchX/_CFSubcluster.cpp",
+                "development-code/bitbirchX/Birch.cpp",
+                "development-code/bitbirchX/abstract_birch.cpp"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Generated task by g++"
+        }
+	]
+}

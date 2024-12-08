@@ -2,13 +2,18 @@
 #include "abstract_birch.h"
 #include "_CFSubcluster.h"
 #include "_CFNode.h"
+#include <xtensor/xnpy.hpp> // for testing
 
 int main() {
     // Simple example running random sets with 1000 to 50000 molecules
     std::string z;
     for (int n = 1000; n < 2001; n += 1000) {
         std::cout << n << std::endl;
-        auto dat = xt::random::randint<int>({n, 100}, 0, 2);
+        // xt::random::seed(0); // for testing
+        // auto dat = xt::random::randint<int>({n, 100}, 0, 2);
+        std::string filename = "C://Users//Kelly//Projects//bitbirch//development-code//bitbirchX//random_data_" + std::to_string(n) + ".npy";
+        xt::xarray<int64_t> dat = xt::load_npy<int64_t>(filename);
+        // std::cout << dat << std::endl;
         auto brc = Birch(0.50, 50, NULL);
         // auto v = time(NULL);
         auto v = std::chrono::high_resolution_clock::now();
@@ -26,14 +31,14 @@ int main() {
         z += oss.str();
     }
 
-    // std::ofstream outfile("jt_fit_label.txt");
-    // if(outfile.is_open()) {
-    //     outfile << z;
-    //     outfile.close();
-    // }
-    // else {
-    //     std::cout << "Unable to open file" << std::endl;
-    // }
+    std::ofstream outfile("jt_fit_label.txt");
+    if(outfile.is_open()) {
+        outfile << z;
+        outfile.close();
+    }
+    else {
+        std::cout << "Unable to open file" << std::endl;
+    }
 
     // xt::xarray<double> arr1
     //   {{1.0, 2.0, 3.0},

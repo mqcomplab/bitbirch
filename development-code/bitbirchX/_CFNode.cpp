@@ -15,7 +15,7 @@ _CFNode::_CFNode(double threshold, int branching_factor, bool is_leaf, int n_fea
 }
 
 void _CFNode::append_subcluster(_CFSubcluster* subcluster) {
-    int n_samples = this->subclusters_.size();
+    this->n_samples = this->subclusters_.size();
     this->subclusters_.push_back(subcluster);
     xt::row(this->init_centroids_, n_samples) = subcluster->centroid_;
 
@@ -44,9 +44,20 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
     branching_factor = this->branching_factor;
     // We need to find the closest subcluster among all the
     // subclusters so that we can insert our new subcluster.
-    xt::xarray<float> a = xt::linalg::dot(this->centroids_, subcluster->centroid_);
+    xt::xarray<int> a = xt::linalg::dot(this->centroids_, subcluster->centroid_);
+    std::cout << this->init_centroids_ << std::endl;
+    // std::cout << "init centroid shape: " << xt::adapt(this->init_centroids_.shape()) << std::endl;
+    std::cout << this->centroids_ << std::endl;
+    std::cout << subcluster->centroid_ << std::endl;
+    std::cout << "a: " << a;
+    // std::cout << "centroid shape: " << xt::adapt(this->centroids_.shape());
+    
+    // std::cout << xt::adapt(a.shape());
+    // std::cout << xt::adapt(centroids_.shape());
+    // std::cout << xt::adapt(subcluster->centroid_.shape());
     xt::xarray<float> dist_matrix = 1 - a / (xt::sum(this->centroids_, 1) + xt::sum(subcluster->centroid_) - a);
     int closest_index = xt::argmin(dist_matrix)();
+    std::cout << "closest index: " << closest_index;
     _CFSubcluster* closest_subcluster = this->subclusters_[closest_index];
     // int closest_index = xt::argmin(subcluster->centroid_, node->centroids_);
 
@@ -58,7 +69,7 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
         if (!split_child) {
             // If it is determined that the childneed not be split, we
             // can just update the closest_subcluster
-            closest_subcluster->update(subcluster); // closest_subcluster.update(subcluster);
+            closest_subcluster->update(subcluster);
             xt::row(this->init_centroids_, closest_index) = this->subclusters_[closest_index]->centroid_;
             return false;
         }
@@ -92,6 +103,7 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
         bool merged = closest_subcluster->merge_subcluster(subcluster, this->threshold);
         if (merged) {
             xt::row(this->init_centroids_, closest_index) = closest_subcluster->centroid_;
+            this->centroids_ = xt::view(this->init_centroids_, xt::range(0, this->n_samples + 1), xt::all());
             return false;
         }
 

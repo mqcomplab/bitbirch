@@ -65,8 +65,9 @@ class _CFNode {
         std::vector<_CFSubcluster*> subclusters_;
         _CFNode* prev_leaf_;
         _CFNode* next_leaf_;
-        xt::xarray<float> init_centroids_;
-        xt::xarray<float> centroids_;
+        xt::xarray<int> init_centroids_;
+        xt::xarray<int> centroids_;
+        int n_samples;
 
         _CFNode(double threshold, int branching_factor, bool is_leaf, int n_features);
         void append_subcluster(_CFSubcluster* subcluster);

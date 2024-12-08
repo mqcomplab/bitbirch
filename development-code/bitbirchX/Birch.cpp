@@ -68,7 +68,11 @@ Birch Birch::_fit(xt::xarray<float> X, bool partial) {
 
     // Cannot vectorize. Enough to convince to use cython.
     // std::cout << "Sample shape: " << X.shape() << std::endl;
-    for (auto sample : X) { 
+    for (int i = 0; i < X.shape(0); i++) { 
+        xt::xarray<int> sample = xt::view(X, i, xt::all());
+        // std::cout << xt::adapt(X.shape());
+        // std::cout << sample << std::endl;
+        // std::cout << xt::adapt(sample.shape()) << std::endl;
         // std::vector<int> mol_indices{this->index_tracker}; can delete
         _CFSubcluster* subcluster = new _CFSubcluster(sample, {this->index_tracker});
         // _CFNode self = *this->root_; can delete

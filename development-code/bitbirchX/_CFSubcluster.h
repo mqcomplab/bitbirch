@@ -51,8 +51,8 @@ class _CFSubcluster {
     public:
         xt::xarray<float> linear_sum;
         int n_samples_;
-        xt::xarray<float> linear_sum_;
-        xt::xarray<float> centroid_;
+        xt::xarray<int> linear_sum_;
+        xt::xarray<int> centroid_;
         std::vector<int> mol_indices;
         _CFNode* child_;
 

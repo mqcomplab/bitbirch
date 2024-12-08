@@ -5,20 +5,20 @@
 
 #include "abstract_birch.h"
 
-xt::xarray<float> find_centroid(xt::xarray<float> X) {
-    // find centroid of matrix X
-    // return centroid;
-}
+// xt::xarray<float> find_centroid(xt::xarray<float> X) {
+//     // find centroid of matrix X
+//     // return centroid;
+// }
 
-float isim(xt::xarray<float> X) {
-    // calculate iSIM for matrix X
-    // return isim; 
-} 
+// float isim(xt::xarray<float> X) {
+//     // calculate iSIM for matrix X
+//     // return isim; 
+// } 
 
-xt::xarray<float> sim_search(xt::xarray<float> point, xt::xarray<float> X) { 
-    // Find similarities between a point and all the rows of matrix X
-    // return similarities; 
-} 
+// xt::xarray<float> sim_search(xt::xarray<float> point, xt::xarray<float> X) { 
+//     // Find similarities between a point and all the rows of matrix X
+//     // return similarities; 
+// } 
 
 //translate jt_distances function?
 
@@ -30,7 +30,7 @@ float jt_isim(xt::xarray<float> c_total, int n_objects) {
     return a/(a + n_objects * sum_kq - sum_kqsq);
 }
 
-std::tuple<std::pair<xt::xarray<int>, xt::xarray<int>>, xt::xarray<float>, xt::xarray<float>> max_separation(xt::xarray<float> X) {
+std::tuple<std::pair<int, int>, xt::xarray<float>, xt::xarray<float>> max_separation(xt::xarray<float> X) {
     // Finds two objects in X that are very separated
     // This is an approximation (is not guaranteed to find
     // the two absolutely most separated objects), but it is
@@ -51,10 +51,25 @@ std::tuple<std::pair<xt::xarray<int>, xt::xarray<int>>, xt::xarray<float>, xt::x
     //                Distances to mol2
     // These are needed for node1_dist and node2_dist in _split_node
 
-    xt::xarray<float> centroid = find_centroid(X);
-    xt::xarray<int> mol1 = xt::argmin(sim_search(centroid, X));
-    xt::xarray<int> mol2 = xt::argmin(sim_search(mol1, X));
-    return make_tuple(std::make_pair(mol1, mol2), 1 - sim_search(mol1, X), 1 - sim_search(mol2, X));
+    int n_samples = X.shape(0);
+    xt::xarray<float> linear_sum = xt::sum(X, 0);
+    xt::xarray<float> med = calc_centroid(linear_sum, n_samples);
+    xt::xarray<float> pop_counts = xt::sum(X, 1); // the number of ones for every row
+    xt::xarray<float> a_med = xt::linalg::dot(X, med); // numerator of the tanimoto between the centroid and every data point (1D vector)
+    xt::xarray<float> sims_med = a_med / (xt::sum(med) + pop_counts - a_med);
+    int mol1 = xt::argmin(sims_med)[0];
+    xt::xarray<float> a_mol1 = xt::linalg::dot(X, xt::view(X, mol1, xt::all()));
+    xt::xarray<float> sims_mol1 = a_mol1 / (xt::view(pop_counts, mol1, xt::all()) + pop_counts - a_mol1);
+    int mol2 = xt::argmin(sims_mol1)[0];
+    xt::xarray<float> a_mol2 = xt::linalg::dot(X, xt::view(X, mol2, xt::all()));
+    xt::xarray<float> sims_mol2 = a_mol2 / (xt::view(pop_counts, mol2, xt::all()) + pop_counts - a_mol2);
+    return make_tuple(std::make_pair(mol1, mol2), 1 - sims_mol1, 1 - sims_mol2);
+
+    // // abstract_birch implementation
+    // xt::xarray<float> centroid = find_centroid(X);
+    // xt::xarray<int> mol1 = xt::argmin(sim_search(centroid, X));
+    // xt::xarray<int> mol2 = xt::argmin(sim_search(mol1, X));
+    // return make_tuple(std::make_pair(mol1, mol2), 1 - sim_search(mol1, X), 1 - sim_search(mol2, X));
 }
 
 xt::xarray<float> calc_centroid(xt::xarray<float> linear_sum, int n_samples, std::string sim_index) { // linear_sum is the same as c_total
@@ -152,7 +167,7 @@ std::pair<_CFSubcluster*, _CFSubcluster*> _split_node(_CFNode* node, double thre
     return std::make_pair(new_subcluster1, new_subcluster2);
 }
 
-float cluster_radius(xt::xarray<float> cluster) { //----cluster is list data type?
-    // Calculate cluster radius
-    //return radius
-} 
+// float cluster_radius(xt::xarray<float> cluster) { //----cluster is list data type?
+//     // Calculate cluster radius
+//     //return radius
+// } 

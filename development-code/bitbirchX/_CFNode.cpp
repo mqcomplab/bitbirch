@@ -1,6 +1,6 @@
 #include "_CFNode.h"
 
-_CFNode::_CFNode(double threshold, int branching_factor, bool is_leaf, int n_features) { //dtype? replace with a vector of floats
+_CFNode::_CFNode(double threshold, int branching_factor, bool is_leaf, int n_features) {
     this->threshold = threshold;
     this->branching_factor = branching_factor;
     this->is_leaf = is_leaf;
@@ -30,6 +30,7 @@ void _CFNode::update_split_subclusters(_CFSubcluster* subcluster, _CFSubcluster*
     int ind = find(this->subclusters_.begin(), this->subclusters_.end(), subcluster) - this->subclusters_.begin();
     this->subclusters_[ind] = new_subcluster1;
     xt::row(this->init_centroids_, ind) = new_subcluster1->centroid_;
+    this->centroids_ = xt::view(this->init_centroids_, xt::range(0, this->n_samples + 1), xt::all());
     this->append_subcluster(new_subcluster2);
 }
 
@@ -44,33 +45,21 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
     branching_factor = this->branching_factor;
     // We need to find the closest subcluster among all the
     // subclusters so that we can insert our new subcluster.
-    xt::xarray<int> a = xt::linalg::dot(this->centroids_, subcluster->centroid_);
-    std::cout << this->init_centroids_ << std::endl;
-    // std::cout << "init centroid shape: " << xt::adapt(this->init_centroids_.shape()) << std::endl;
-    std::cout << this->centroids_ << std::endl;
-    std::cout << subcluster->centroid_ << std::endl;
-    std::cout << "a: " << a;
-    // std::cout << "centroid shape: " << xt::adapt(this->centroids_.shape());
-    
-    // std::cout << xt::adapt(a.shape());
-    // std::cout << xt::adapt(centroids_.shape());
-    // std::cout << xt::adapt(subcluster->centroid_.shape());
+    xt::xarray<double> a = xt::linalg::dot(this->centroids_, subcluster->centroid_);
     xt::xarray<float> dist_matrix = 1 - a / (xt::sum(this->centroids_, 1) + xt::sum(subcluster->centroid_) - a);
     int closest_index = xt::argmin(dist_matrix)();
-    std::cout << "closest index: " << closest_index;
     _CFSubcluster* closest_subcluster = this->subclusters_[closest_index];
-    // int closest_index = xt::argmin(subcluster->centroid_, node->centroids_);
 
     // If the subcluster has a child, we need a recursive strategy.
     if (closest_subcluster->child_ != nullptr) {
-        _CFNode child = *closest_subcluster->child_;
-        bool split_child = child.insert_cf_subcluster(subcluster);
+        bool split_child = closest_subcluster->child_->insert_cf_subcluster(subcluster);
 
         if (!split_child) {
             // If it is determined that the childneed not be split, we
             // can just update the closest_subcluster
             closest_subcluster->update(subcluster);
             xt::row(this->init_centroids_, closest_index) = this->subclusters_[closest_index]->centroid_;
+            this->centroids_ = xt::view(this->init_centroids_, xt::range(0, this->n_samples + 1), xt::all());
             return false;
         }
 

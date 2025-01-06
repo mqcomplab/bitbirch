@@ -7,7 +7,7 @@
 int main() {
     // Simple example running random sets with 1000 to 50000 molecules
     std::string z;
-    for (int n = 1000; n < 2001; n += 1000) {
+    for (int n = 1000; n < 10001; n += 1000) {
         std::cout << n << std::endl;
         // xt::random::seed(0); // for testing
         // auto dat = xt::random::randint<int>({n, 100}, 0, 2);
@@ -15,7 +15,6 @@ int main() {
         xt::xarray<int64_t> dat = xt::load_npy<int64_t>(filename);
         // std::cout << dat << std::endl;
         auto brc = Birch(0.50, 50, NULL);
-        // auto v = time(NULL);
         auto v = std::chrono::high_resolution_clock::now();
         brc.fit(dat);
         auto leaves = brc._get_leaves();
@@ -31,7 +30,7 @@ int main() {
         z += oss.str();
     }
 
-    std::ofstream outfile("jt_fit_label.txt");
+    std::ofstream outfile("../bitbirch/development-code/bitbirchX/jt_fit_label.txt");
     if(outfile.is_open()) {
         outfile << z;
         outfile.close();
@@ -39,18 +38,6 @@ int main() {
     else {
         std::cout << "Unable to open file" << std::endl;
     }
-
-    // xt::xarray<double> arr1
-    //   {{1.0, 2.0, 3.0},
-    //    {2.0, 5.0, 7.0},
-    //    {2.0, 5.0, 7.0}};
-
-    // xt::xarray<double> arr2
-    //   {5.0, 6.0, 4.0};
-
-    // xt::xarray<double> res = xt::view(arr1, 1) + arr2;
-
-    // std::cout << res << std::endl;
 
     return 0;
 }

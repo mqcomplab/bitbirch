@@ -20,8 +20,6 @@
 //     // return similarities; 
 // } 
 
-//translate jt_distances function?
-
 float jt_isim(xt::xarray<float> c_total, int n_objects) {
     // iSIM Tanimoto calculation
     float sum_kq = xt::sum(c_total)();
@@ -117,21 +115,21 @@ std::pair<_CFSubcluster*, _CFSubcluster*> _split_node(_CFNode* node, double thre
         branching_factor=branching_factor, 
         node->is_leaf, 
         node->n_features //----maybe private these attributes and use getters?
-        // dtype=node->init_centroids_.dtype //----dtype is from numpy, but how is it used?
+        // dtype=node->init_centroids_.dtype //----dtype is from numpy
     );
     _CFNode* new_node2 = new _CFNode(
         threshold=threshold, 
         branching_factor=branching_factor, 
         node->is_leaf, 
         node->n_features //----maybe private these attributes and use getters?
-        // dtype=node->init_centroids_.dtype //----dtype is from numpy, but how is it used?
+        // dtype=node->init_centroids_.dtype //----dtype is from numpy
     );
     new_subcluster1->child_ = new_node1;
     new_subcluster2->child_ = new_node2;
 
     if (node->is_leaf) {
         if (node->prev_leaf_ != nullptr) {
-            node->prev_leaf_->next_leaf_ = new_node1; //----pointers??
+            node->prev_leaf_->next_leaf_ = new_node1; 
         }
         new_node1->prev_leaf_ = node->prev_leaf_;
         new_node1->next_leaf_ = new_node2;
@@ -167,7 +165,7 @@ std::pair<_CFSubcluster*, _CFSubcluster*> _split_node(_CFNode* node, double thre
     return std::make_pair(new_subcluster1, new_subcluster2);
 }
 
-// float cluster_radius(xt::xarray<float> cluster) { //----cluster is list data type?
+// float cluster_radius(xt::xarray<float> cluster) { 
 //     // Calculate cluster radius
 //     //return radius
 // } 

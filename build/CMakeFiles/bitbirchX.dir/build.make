@@ -68,29 +68,29 @@ include CMakeFiles/bitbirchX.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/bitbirchX.dir/flags.make
 
-CMakeFiles/bitbirchX.dir/main.cpp.obj: CMakeFiles/bitbirchX.dir/flags.make
-CMakeFiles/bitbirchX.dir/main.cpp.obj: CMakeFiles/bitbirchX.dir/includes_CXX.rsp
-CMakeFiles/bitbirchX.dir/main.cpp.obj: C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/main.cpp
-CMakeFiles/bitbirchX.dir/main.cpp.obj: CMakeFiles/bitbirchX.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kelly\Projects\bitbirch\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bitbirchX.dir/main.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bitbirchX.dir/main.cpp.obj -MF CMakeFiles\bitbirchX.dir\main.cpp.obj.d -o CMakeFiles\bitbirchX.dir\main.cpp.obj -c C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\main.cpp
+CMakeFiles/bitbirchX.dir/src/main.cpp.obj: CMakeFiles/bitbirchX.dir/flags.make
+CMakeFiles/bitbirchX.dir/src/main.cpp.obj: CMakeFiles/bitbirchX.dir/includes_CXX.rsp
+CMakeFiles/bitbirchX.dir/src/main.cpp.obj: C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/src/main.cpp
+CMakeFiles/bitbirchX.dir/src/main.cpp.obj: CMakeFiles/bitbirchX.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kelly\Projects\bitbirch\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bitbirchX.dir/src/main.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bitbirchX.dir/src/main.cpp.obj -MF CMakeFiles\bitbirchX.dir\src\main.cpp.obj.d -o CMakeFiles\bitbirchX.dir\src\main.cpp.obj -c C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\src\main.cpp
 
-CMakeFiles/bitbirchX.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/bitbirchX.dir/main.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\main.cpp > CMakeFiles\bitbirchX.dir\main.cpp.i
+CMakeFiles/bitbirchX.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/bitbirchX.dir/src/main.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\src\main.cpp > CMakeFiles\bitbirchX.dir\src\main.cpp.i
 
-CMakeFiles/bitbirchX.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bitbirchX.dir/main.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\main.cpp -o CMakeFiles\bitbirchX.dir\main.cpp.s
+CMakeFiles/bitbirchX.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bitbirchX.dir/src/main.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kelly\Projects\bitbirch\development-code\bitbirchX\src\main.cpp -o CMakeFiles\bitbirchX.dir\src\main.cpp.s
 
 # Object files for target bitbirchX
 bitbirchX_OBJECTS = \
-"CMakeFiles/bitbirchX.dir/main.cpp.obj"
+"CMakeFiles/bitbirchX.dir/src/main.cpp.obj"
 
 # External object files for target bitbirchX
 bitbirchX_EXTERNAL_OBJECTS =
 
-bitbirchX.exe: CMakeFiles/bitbirchX.dir/main.cpp.obj
+bitbirchX.exe: CMakeFiles/bitbirchX.dir/src/main.cpp.obj
 bitbirchX.exe: CMakeFiles/bitbirchX.dir/build.make
 bitbirchX.exe: C:/msys64/mingw64/lib/libopenblas.dll.a
 bitbirchX.exe: CMakeFiles/bitbirchX.dir/linkLibs.rsp

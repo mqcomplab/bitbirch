@@ -8,12 +8,12 @@
             "args": [
 				"-g",
                 "-I", "C:\\Users\\Kelly\\mambaforge\\Library\\include",
-                "-o", "main",
-                "development-code/bitbirchX/main.cpp",
-                "development-code/bitbirchX/_CFNode.cpp",
-                "development-code/bitbirchX/_CFSubcluster.cpp",
-                "development-code/bitbirchX/Birch.cpp",
-                "development-code/bitbirchX/abstract_birch.cpp"
+                "-o", "development-code/bitbirchX/src/main",
+                "development-code/bitbirchX/src/main.cpp",
+                "development-code/bitbirchX/src/_CFNode.cpp",
+                "development-code/bitbirchX/src/_CFSubcluster.cpp",
+                "development-code/bitbirchX/src/Birch.cpp",
+                "development-code/bitbirchX/src/abstract_birch.cpp"
             ],
             "group": {
                 "kind": "build",

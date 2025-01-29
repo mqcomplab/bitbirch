@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/bitbirchX.dir/main.cpp.obj"
-  "CMakeFiles/bitbirchX.dir/main.cpp.obj.d"
+  "CMakeFiles/bitbirchX.dir/src/main.cpp.obj"
+  "CMakeFiles/bitbirchX.dir/src/main.cpp.obj.d"
   "bitbirchX.exe"
   "bitbirchX.exe.manifest"
   "bitbirchX.pdb"

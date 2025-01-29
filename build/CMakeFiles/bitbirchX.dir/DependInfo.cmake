@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/main.cpp" "CMakeFiles/bitbirchX.dir/main.cpp.obj" "gcc" "CMakeFiles/bitbirchX.dir/main.cpp.obj.d"
+  "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/src/main.cpp" "CMakeFiles/bitbirchX.dir/src/main.cpp.obj" "gcc" "CMakeFiles/bitbirchX.dir/src/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

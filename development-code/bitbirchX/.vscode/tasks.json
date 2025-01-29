@@ -9,11 +9,11 @@
                 "-g",
                 "-I", "C:\\Users\\Kelly\\mambaforge\\Library\\include",
                 "-o", "main",
-                "main.cpp",
-                "_CFNode.cpp",
-                "_CFSubcluster.cpp",
-                "Birch.cpp",
-                "abstract_birch.cpp"
+                "src/main.cpp",
+                "src/_CFNode.cpp",
+                "src/_CFSubcluster.cpp",
+                "src/Birch.cpp",
+                "src/abstract_birch.cpp"
             ],
             "group": "build",
             "problemMatcher": [

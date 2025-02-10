@@ -21,6 +21,7 @@ env/
 
 # Ignore CMake files
 CMakeCache.txt
+CMakeLists.txt
 CMakeFiles/
 Makefile
 *.cmake

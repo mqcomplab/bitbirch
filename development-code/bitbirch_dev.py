@@ -26,8 +26,11 @@
 ###          Joel Nothman <joel.nothman@gmail.com>
 ### License: BSD 3 clause
 
+import time
 import numpy as np
 from scipy import sparse
+from sklearn.cluster import KMeans
+from sklearn.metrics import pairwise_distances_argmin
 
 def jt_distances(X):
     """Calculates the matrix of Tanimoto distances
@@ -439,6 +442,9 @@ class BitBirch():
     subcluster_labels_ : ndarray
         Labels assigned to the centroids of the subclusters after
         they are clustered globally.
+    
+    labels_ : ndarray of shape (n_samples,)
+        Array of labels assigned to the input data.
 
     Notes
     -----
@@ -558,7 +564,7 @@ class BitBirch():
         self._n_features_out = self.subcluster_centers_.shape[0]
         
         # TODO: Incorporate global_clustering option
-        #self._global_clustering(X)
+        self._global_clustering(X)
         self.first_call = False
         return self
 
@@ -581,3 +587,44 @@ class BitBirch():
     def retrieveVal(self):
         print()
 
+    def _global_clustering(self, X):
+        clusters = self.n_clusters
+        centroids = self.subcluster_centers_
+        compute_labels = (X is not None) and self.compute_labels
+
+        if isinstance(clusters, int):
+            km = KMeans(n_clusters=clusters)
+            self.subcluster_labels_ = km.fit_predict(centroids)
+        else:
+            # argument is None (skip global clustering)
+            self.subcluster_labels_ = np.arange(len(centroids))
+            return
+
+        if compute_labels:
+            argmin = pairwise_distances_argmin(X, centroids)
+            self.labels_ = self.subcluster_labels_[argmin]
+
+# Simple example running random sets with 1000 to 50000 molecules
+z = ''
+for n in range(1000, 2001, 1000):
+    print(n)
+    np.random.seed(0) # for testing
+    dat = np.random.randint(2, size=(n, 100), dtype='int64')
+    # filename = f"random_data_{n}.npy"
+    # np.save(filename, dat)
+    # print(dat)
+    brc = BitBirch(n_clusters=5, branching_factor=50, threshold = 0.50)
+    v = time.time()
+    brc.fit(dat)
+    #brc.check_threshold()
+    #labels = brc.predict(dat)
+    # leaves = brc._get_leaves()
+    # for leave in leaves:
+    #    for subcluster in leave.subclusters_:
+    #        print(len(subcluster.mol_indices))
+            
+    z += '{:10}    {:10.6}\n'.format(n, time.time() - v)
+    #z += '{:10}    {:10}\n'.format(n, len(brc.subcluster_centers_))
+
+with open('jt_fit_label.txt', 'w') as outfile:
+    outfile.write(z[:-1])

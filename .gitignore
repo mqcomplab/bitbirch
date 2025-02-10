@@ -1,0 +1,26 @@
+# Ignore build files
+/build/
+/bin/
+/obj/
+/out/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+.env/
+
+# Ignore CMake files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake

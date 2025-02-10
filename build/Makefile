@@ -148,6 +148,102 @@ bitbirchX/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/build
 .PHONY : bitbirchX/fast
 
+src/Birch.obj: src/Birch.cpp.obj
+.PHONY : src/Birch.obj
+
+# target to build an object file
+src/Birch.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/Birch.cpp.obj
+.PHONY : src/Birch.cpp.obj
+
+src/Birch.i: src/Birch.cpp.i
+.PHONY : src/Birch.i
+
+# target to preprocess a source file
+src/Birch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/Birch.cpp.i
+.PHONY : src/Birch.cpp.i
+
+src/Birch.s: src/Birch.cpp.s
+.PHONY : src/Birch.s
+
+# target to generate assembly for a file
+src/Birch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/Birch.cpp.s
+.PHONY : src/Birch.cpp.s
+
+src/_CFNode.obj: src/_CFNode.cpp.obj
+.PHONY : src/_CFNode.obj
+
+# target to build an object file
+src/_CFNode.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFNode.cpp.obj
+.PHONY : src/_CFNode.cpp.obj
+
+src/_CFNode.i: src/_CFNode.cpp.i
+.PHONY : src/_CFNode.i
+
+# target to preprocess a source file
+src/_CFNode.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFNode.cpp.i
+.PHONY : src/_CFNode.cpp.i
+
+src/_CFNode.s: src/_CFNode.cpp.s
+.PHONY : src/_CFNode.s
+
+# target to generate assembly for a file
+src/_CFNode.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFNode.cpp.s
+.PHONY : src/_CFNode.cpp.s
+
+src/_CFSubcluster.obj: src/_CFSubcluster.cpp.obj
+.PHONY : src/_CFSubcluster.obj
+
+# target to build an object file
+src/_CFSubcluster.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFSubcluster.cpp.obj
+.PHONY : src/_CFSubcluster.cpp.obj
+
+src/_CFSubcluster.i: src/_CFSubcluster.cpp.i
+.PHONY : src/_CFSubcluster.i
+
+# target to preprocess a source file
+src/_CFSubcluster.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFSubcluster.cpp.i
+.PHONY : src/_CFSubcluster.cpp.i
+
+src/_CFSubcluster.s: src/_CFSubcluster.cpp.s
+.PHONY : src/_CFSubcluster.s
+
+# target to generate assembly for a file
+src/_CFSubcluster.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/_CFSubcluster.cpp.s
+.PHONY : src/_CFSubcluster.cpp.s
+
+src/abstract_birch.obj: src/abstract_birch.cpp.obj
+.PHONY : src/abstract_birch.obj
+
+# target to build an object file
+src/abstract_birch.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/abstract_birch.cpp.obj
+.PHONY : src/abstract_birch.cpp.obj
+
+src/abstract_birch.i: src/abstract_birch.cpp.i
+.PHONY : src/abstract_birch.i
+
+# target to preprocess a source file
+src/abstract_birch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/abstract_birch.cpp.i
+.PHONY : src/abstract_birch.cpp.i
+
+src/abstract_birch.s: src/abstract_birch.cpp.s
+.PHONY : src/abstract_birch.s
+
+# target to generate assembly for a file
+src/abstract_birch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\bitbirchX.dir\build.make CMakeFiles/bitbirchX.dir/src/abstract_birch.cpp.s
+.PHONY : src/abstract_birch.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -183,6 +279,18 @@ help:
 	@echo ... package_source
 	@echo ... rebuild_cache
 	@echo ... bitbirchX
+	@echo ... src/Birch.obj
+	@echo ... src/Birch.i
+	@echo ... src/Birch.s
+	@echo ... src/_CFNode.obj
+	@echo ... src/_CFNode.i
+	@echo ... src/_CFNode.s
+	@echo ... src/_CFSubcluster.obj
+	@echo ... src/_CFSubcluster.i
+	@echo ... src/_CFSubcluster.s
+	@echo ... src/abstract_birch.obj
+	@echo ... src/abstract_birch.i
+	@echo ... src/abstract_birch.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

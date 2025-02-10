@@ -14,7 +14,7 @@ int main() {
         // std::string filename = "../bitbirch/development-code/bitbirchX/random_data_" + std::to_string(n) + ".npy";
         // xt::xarray<int64_t> dat = xt::load_npy<int64_t>(filename);
         // std::cout << dat << std::endl;
-        auto brc = Birch(0.50, 50, NULL);
+        auto brc = Birch(0.50, 50);
         auto v = std::chrono::high_resolution_clock::now();
         brc.fit(dat);
         auto leaves = brc._get_leaves();

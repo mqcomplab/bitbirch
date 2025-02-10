@@ -8,7 +8,7 @@ find_package(xtensor REQUIRED)
 set(xtensor-blas_DIR "C:\\Users\\Kelly\\mambaforge\\Library\\lib\\cmake\\xtensor-blas")
 find_package(xtensor-blas REQUIRED)
 
-add_executable(bitbirchX src/main.cpp)
+add_executable(bitbirchX src/main.cpp src/Birch.cpp src/abstract_birch.cpp src/_CFNode.cpp src/_CFSubcluster.cpp)
 
 target_include_directories(bitbirchX PUBLIC "C:\\Users\\Kelly\\mambaforge\\Library\\include\\xtensor")
 target_include_directories(bitbirchX PUBLIC "C:\\Users\\Kelly\\mambaforge\\Library\\include\\xtensor-blas")

@@ -29,7 +29,7 @@
 import time
 import numpy as np
 from scipy import sparse
-from sklearn.cluster import KMeans
+from sklearn.cluster import AgglomerativeClustering, KMeans
 from sklearn.metrics import pairwise_distances_argmin
 
 def jt_distances(X):
@@ -471,6 +471,7 @@ class BitBirch():
         compute_labels=True,
         copy=True,
         perform_clustering=False,
+        clustering_type=""
     ):
         self.threshold = threshold
         self.branching_factor = branching_factor
@@ -480,6 +481,7 @@ class BitBirch():
         self.index_tracker = 0
         self.first_call = True
         self.perform_clustering = perform_clustering
+        self.clustering_type = clustering_type
 
     def fit(self, X, y=None):
         """
@@ -590,15 +592,22 @@ class BitBirch():
         print()
 
     def _global_clustering(self, X):
+        """
+        Global clustering for the subclusters obtained after fitting
+        """
         clusters = self.n_clusters
         centroids = self.subcluster_centers_
+        clustering_type = self.clustering_type
         compute_labels = (X is not None) and self.compute_labels
 
-        if isinstance(clusters, int):
-            km = KMeans(n_clusters=clusters)
-            self.subcluster_labels_ = km.fit_predict(centroids)
+        if clustering_type == "kmeans" and isinstance(clusters, int):
+            clusterer = KMeans(n_clusters=clusters)
+            self.subcluster_labels_ = clusterer.fit_predict(centroids)
+        elif clustering_type == "hierarchical" and isinstance(clusters, int):
+            clusterer = AgglomerativeClustering(n_clusters=clusters)
+            self.subcluster_labels_ = clusterer.fit_predict(centroids)
         else:
-            # argument is None (skip global clustering)
+            # n_clusters is None and/or clustering_type == "" (skip global clustering)
             self.subcluster_labels_ = np.arange(len(centroids))
             return
 

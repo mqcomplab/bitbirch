@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/bitbirchX.dir/includes_CXX.rsp -g -o CMakeFiles\\bitbirchX.dir\\src\\main.cpp.obj -c C:\\Users\\Kelly\\Projects\\bitbirch\\development-code\\bitbirchX\\src\\main.cpp",
-  "file": "C:/Users/Kelly/Projects/bitbirch/development-code/bitbirchX/src/main.cpp",
-  "output": "CMakeFiles/bitbirchX.dir/src/main.cpp.obj"
-}
-]

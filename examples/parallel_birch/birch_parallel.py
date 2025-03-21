@@ -1,5 +1,5 @@
 import argparse
-from bitbirch import BitBirch
+import bitbirch.bitbirch as bb
 import numpy
 import time
 import pickle as pkl
@@ -18,8 +18,11 @@ if not os.path.exists('centroids'):
 if not os.path.exists('mol_ind'):
     os.makedirs('mol_ind')
 
+# Set the merging criterion
+bb.set_merge('diameter')
+
 # Initiate the BIRCH model
-birch = BitBirch(threshold=0.65, branching_factor=50)
+birch = bb.BitBirch(threshold=0.65, branching_factor=50)
 
 # Read the fingerprints
 fps_npy = numpy.load(args.file, mmap_mode='r')

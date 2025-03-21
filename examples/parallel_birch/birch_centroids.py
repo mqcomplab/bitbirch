@@ -1,5 +1,5 @@
 import argparse
-from bitbirch import BitBirch
+import bitbirch.bitbirch as bb
 import pickle as pkl
 import time
 import numpy as np
@@ -22,7 +22,8 @@ with open('fps_splits.txt', 'r') as f:
     splits = f.read().splitlines()
 
 start = time.time()
-brc = BitBirch(threshold=float(args.threshold), branching_factor=50)  #threshold could be changed by the user
+bb.set_merge('diameter')
+brc = bb.BitBirch(threshold=float(args.threshold), branching_factor=50)  #threshold could be changed by the user
 for split in splits:
     f = open(f'centroids/centroids_{split}.pkl', 'rb')
     data = pkl.load(f)

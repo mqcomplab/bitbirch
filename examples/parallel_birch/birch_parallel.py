@@ -13,10 +13,8 @@ parser.add_argument('-f', '--file', help='The file containing the fingerprints',
 args = parser.parse_args()
 
 # Check that directory centroids and mol_ind exists
-if not os.path.exists('centroids'):
-    os.makedirs('centroids')
-if not os.path.exists('mol_ind'):
-    os.makedirs('mol_ind')
+if not os.path.exists('BFs'):
+    os.makedirs('BFs')
 
 # Set the merging criterion
 bb.set_merge('diameter')
@@ -38,20 +36,20 @@ final_index = int(name_without_path.split('_')[-1])
 start = time.time()
 
 # Fit the BIRCH model
-birch.fit_reinsert(fps_npy, list(range(initial_index, final_index+1)))
+birch.fit_reinsert(fps_npy, list(range(initial_index, final_index+1)), singly=True)
 
 # End the timer
 end = time.time()
 
-# Get the centroids
-centroids = birch.get_centroids()
+# Get the BFs of the leave nodes
+BFs, BFs_problematic = birch.prepare_BFs_parallel(fps_npy, initial_mol=initial_index)
 
-# Get the indexes
-indexes = birch.get_cluster_mol_ids()
+# Delete the fingerprints
+del fps_npy
 
 # Save the centroids and indexes
-pkl.dump(centroids, open(f'centroids/centroids_{initial_index}_{final_index}.pkl', 'wb'))
-pkl.dump(indexes, open(f'mol_ind/mol_ind_{initial_index}_{final_index}.pkl', 'wb'))
+pkl.dump(BFs, open(f'BFs/BFs_{initial_index}_{final_index}.pkl', 'wb'))
+pkl.dump(BFs_problematic, open(f'BFs/BFs_problematic_{initial_index}_{final_index}.pkl', 'wb'))
 
 if not os.path.exists('times'):
     os.makedirs('times')

@@ -839,7 +839,7 @@ class BitBirch():
 
         return BFs
         
-    def prepare_BFs(self, fps):
+    def prepare_BFs(self, fps, initial_mol = 0):
         """Method to prepare the BitFeatures of the largest cluster and the rest of the clusters"""
         if self.first_call:
             raise ValueError('The model has not been fitted yet.')
@@ -849,10 +849,28 @@ class BitBirch():
 
         for mol in big.mol_indices:
             single_BF = _BFSubcluster()
-            single_BF.n_samples_, single_BF.linear_sum_, single_BF.centroid_, single_BF.mol_indices = 1, fps[mol], fps[mol], [mol]
+            single_BF.n_samples_, single_BF.linear_sum_, single_BF.centroid_, single_BF.mol_indices = 1, fps[mol - initial_mol], fps[mol - initial_mol], [mol - initial_mol]
             rest.append(single_BF)
 
         return rest
+    
+    def prepare_BFs_parallel(self, fps, initial_mol = 0):
+        """Method to prepare the BitFeatures of the largest cluster and the rest of the clusters"""
+        if self.first_call:
+            raise ValueError('The model has not been fitted yet.')
+        
+        BFs = self._get_BFs()
+        big, rest = BFs[0], BFs[1:]
+
+        bigs = []
+        for mol in big.mol_indices:
+            single_BF = _BFSubcluster()
+            single_BF.n_samples_, single_BF.linear_sum_, single_BF.centroid_, single_BF.mol_indices = 1, fps[mol - initial_mol], fps[mol - initial_mol], [mol - initial_mol]
+            bigs.append(single_BF)
+
+        del big
+
+        return rest, bigs
 
 #Refinement functionality 
 

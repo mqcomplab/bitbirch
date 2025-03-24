@@ -8,6 +8,7 @@ import os
 # Parse the arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--file', help='The file containing the fingerprints', required=True)
+parser.add_argument('-t', '--threshold', help='The threshold for the BIRCH algorithm', required=True)
 
 # Parse the arguments
 args = parser.parse_args()
@@ -20,7 +21,7 @@ if not os.path.exists('BFs'):
 bb.set_merge('diameter')
 
 # Initiate the BIRCH model
-birch = bb.BitBirch(threshold=0.65, branching_factor=50)
+birch = bb.BitBirch(threshold=float(args.threshold), branching_factor=50)
 
 # Read the fingerprints
 fps_npy = numpy.load(args.file, mmap_mode='r')
@@ -42,7 +43,7 @@ birch.fit_reinsert(fps_npy, list(range(initial_index, final_index+1)), singly=Tr
 end = time.time()
 
 # Get the BFs of the leave nodes
-BFs, BFs_problematic = birch.prepare_BFs_parallel(fps_npy, initial_mol=initial_index)
+BFs, BFs_problematic = birch.prepare_data_BFs(fps_npy, initial_mol=initial_index)
 
 # Delete the fingerprints
 del fps_npy
@@ -57,4 +58,3 @@ if not os.path.exists('times'):
 with open(f'times/time_{initial_index}_{final_index}.txt', 'w') as f:
     f.write(str(end - start))
     f.write('\n')
-

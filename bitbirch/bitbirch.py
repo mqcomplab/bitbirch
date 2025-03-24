@@ -707,14 +707,14 @@ class BitBirch():
         """
 
         # Check that the input is a list of BitFeatures
-        if type(X) != list or X[0].__class__.__name__ != '_BFSubcluster':
+        if type(X) != list or len(X[0]) != 3:
             raise ValueError('The input must be a list of BitFeatures')
         
         threshold = self.threshold
         branching_factor = self.branching_factor
 
-        n_features = X[0].centroid_.shape[0]
-        d_type = X[0].centroid_.dtype
+        n_features = len(X[0][1])
+        d_type = X[0][1].dtype
 
         # If partial_fit is called for the first time or fit is called, we
         # start a new tree.
@@ -739,7 +739,11 @@ class BitBirch():
             self.dummy_leaf_.next_leaf_ = self.root_
             self.root_.prev_leaf_ = self.dummy_leaf_
 
-        for cluster in iter(X):
+        for sample in iter(X):
+
+            cluster = _BFSubcluster()
+            cluster.n_samples_, cluster.linear_sum_, cluster.mol_indices = sample[0], sample[1], sample[2]
+            cluster.centroid_ = calc_centroid(cluster.linear_sum_, cluster.n_samples_)
 
             set_bits = np.sum(cluster.centroid_)
             split = self.root_.insert_bf_subcluster(cluster, set_bits, cluster.parent_, True)
@@ -838,8 +842,8 @@ class BitBirch():
         BFs = sorted(BFs, key = lambda x: x.n_samples_, reverse = True)
 
         return BFs
-        
-    def prepare_BFs(self, fps, initial_mol = 0):
+         
+    def prepare_data_BFs(self, fps, initial_mol = 0):
         """Method to prepare the BitFeatures of the largest cluster and the rest of the clusters"""
         if self.first_call:
             raise ValueError('The model has not been fitted yet.')
@@ -847,31 +851,16 @@ class BitBirch():
         BFs = self._get_BFs()
         big, rest = BFs[0], BFs[1:]
 
-        for mol in big.mol_indices:
-            single_BF = _BFSubcluster()
-            single_BF.n_samples_, single_BF.linear_sum_, single_BF.centroid_, single_BF.mol_indices = 1, fps[mol - initial_mol], fps[mol - initial_mol], [mol - initial_mol]
-            rest.append(single_BF)
-
-        return rest
-    
-    def prepare_BFs_parallel(self, fps, initial_mol = 0):
-        """Method to prepare the BitFeatures of the largest cluster and the rest of the clusters"""
-        if self.first_call:
-            raise ValueError('The model has not been fitted yet.')
-        
-        BFs = self._get_BFs()
-        big, rest = BFs[0], BFs[1:]
+        data = []
+        for BF in rest:
+            data.append([BF.n_samples_, BF.linear_sum_.astype(np.int64), BF.mol_indices])
 
         bigs = []
         for mol in big.mol_indices:
-            single_BF = _BFSubcluster()
-            single_BF.n_samples_, single_BF.linear_sum_, single_BF.centroid_, single_BF.mol_indices = 1, fps[mol - initial_mol], fps[mol - initial_mol], [mol - initial_mol]
-            bigs.append(single_BF)
+            bigs.append([1, fps[mol - initial_mol].astype(np.int64), [mol]])
 
-        del big
-
-        return rest, bigs
-
+        return data, bigs
+    
 #Refinement functionality 
 
     def _get_prune_indices(self):

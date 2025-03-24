@@ -2,7 +2,6 @@ import argparse
 import bitbirch.bitbirch as bb
 import pickle as pkl
 import time
-import numpy as np
 
 # Parse the arguments
 parser = argparse.ArgumentParser()
@@ -23,13 +22,9 @@ for split in splits:
     data = pkl.load(f)
     brc.fit_BFs(data)
 
-#    f_ = open(f'BFs/BFs_problematic_{split}.pkl', 'rb')
-#    data = pkl.load(f_)
-#    brc.fit_BFs(data)
-
 for split in splits:
-    f = open(f'BFs/BFs_problematic_{split}.pkl', 'rb')
-    data = pkl.load(f)
+    f_ = open(f'BFs/BFs_problematic_{split}.pkl', 'rb')
+    data = pkl.load(f_)
     brc.fit_BFs(data)
 
 f.close()

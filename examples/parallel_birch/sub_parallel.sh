@@ -5,7 +5,7 @@ while IFS= read -r line; do
     job_script="job_${line}.sh"
     cat > $job_script << EOL
 #!/bin/bash
-python3 birch_parallel.py -f $filename
+python3 birch_parallel.py -f $filename -t 0.65
 EOL
     # Submit the job
     bash $job_script

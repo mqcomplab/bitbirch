@@ -826,6 +826,9 @@ class BitBirch():
             for subcluster in leaf.subclusters_:
                 clusters_mol_id.append(subcluster.mol_indices)
 
+        # Sort the clusters by the number of samples in the cluster
+        clusters_mol_id = sorted(clusters_mol_id, key = lambda x: len(x), reverse = True)
+
         return clusters_mol_id
     
     def _get_BFs(self):
@@ -860,6 +863,18 @@ class BitBirch():
             bigs.append([1, fps[mol - initial_mol].astype(np.int64), [mol]])
 
         return data, bigs
+    
+    def get_assignments(self, n_mols):
+        clustered_ids = self.get_cluster_mol_ids()
+
+        assignments = np.full(n_mols, -1, dtype=int)
+        for i, cluster in enumerate(clustered_ids):
+            assignments[cluster] = i + 1
+
+        # Check that there are no unassigned molecules
+        assert np.all(assignments != -1)
+
+        return assignments
     
 #Refinement functionality 
 

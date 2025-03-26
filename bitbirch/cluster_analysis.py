@@ -2,7 +2,7 @@ from bitbirch.cluster_control import chi, dbi, dunn, birch_analysis, radius, jt_
 import numpy as np
 from rdkit.Chem.Scaffolds import MurckoScaffold
 import pandas as pd
-from iSIM.sampling import stratified_sampling, outlier_sampling, medoid_sampling
+from iSIM.sampling import outlier_sampling, medoid_sampling
 from iSIM.utils import binary_fps
 
 class ClusterAnalysis:

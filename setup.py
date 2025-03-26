@@ -17,7 +17,9 @@ setup(
         'rdkit',
         'scipy',
         'seaborn',
-        'scikit-learn'
-        'plotly'
+        'scikit-learn',
+        'plotly',
+        'iSIM @ git+https://github.com/mqcomplab/iSIM.git',
+        'useful_rdkit_utils @ git+https://github.com/PatWalters/useful_rdkit_utils.git'
     ]
 )

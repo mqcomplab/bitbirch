@@ -11,12 +11,13 @@ setup(
     url='https://github.com/mqcomplab/bitbirch.git',  # Update with the actual URL if available
     packages=find_packages(),
     install_requires=[
-        'numpy',
+        'numpy<2,>=1.20',
         'matplotlib',
         'pandas',
         'rdkit',
         'scipy',
         'seaborn',
         'scikit-learn'
+        'plotly'
     ]
 )

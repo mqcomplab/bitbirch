@@ -16,7 +16,7 @@ Birch::Birch(
     this->first_call = true; // TODO: first_call wasn't properly updated between runs. Check this hack
 }
 
-Birch Birch::fit(xt::xarray<float> X, void* y) {
+Birch Birch::fit(const xt::xarray<float>& X, void* y) {
     // Build a CF Tree for the input data.
 
     // Parameters
@@ -37,7 +37,7 @@ Birch Birch::fit(xt::xarray<float> X, void* y) {
     return this->_fit(X, false);
 }
 
-Birch Birch::_fit(xt::xarray<float> X, bool partial) {
+Birch Birch::_fit(const xt::xarray<float>& X, bool partial) {
     threshold = this->threshold;
     branching_factor = this->branching_factor;
 
@@ -68,7 +68,7 @@ Birch Birch::_fit(xt::xarray<float> X, bool partial) {
 
     // Cannot vectorize. Enough to convince to use cython.
     for (int i = 0; i < X.shape(0); i++) { 
-        xt::xarray<int> sample = xt::view(X, i, xt::all());
+        xt::xarray<int> sample = xt::row(X, i);
         _CFSubcluster* subcluster = new _CFSubcluster(sample, {this->index_tracker});
         bool split = this->root_->insert_cf_subcluster(subcluster);
 
@@ -124,4 +124,15 @@ std::vector<_CFNode*> Birch::_get_leaves() {
         leaf_ptr = leaf_ptr->next_leaf_;
     }
     return leaves;
+}
+
+Birch::~Birch() {
+    // if (root_ != nullptr) {
+    //     delete root_;
+    //     root_ = nullptr;
+    // }
+    // if (dummy_leaf_ != nullptr) {
+    //     delete dummy_leaf_;
+    //     dummy_leaf_ = nullptr;
+    // }
 }

@@ -27,9 +27,12 @@ void _CFNode::append_subcluster(_CFSubcluster* subcluster) {
 void _CFNode::update_split_subclusters(_CFSubcluster* subcluster, _CFSubcluster* new_subcluster1, _CFSubcluster* new_subcluster2) {
     // Remove a subcluster from a node and update it with the 
     // split subclusters.
-    int ind = find(this->subclusters_.begin(), this->subclusters_.end(), subcluster) - this->subclusters_.begin();
-    this->subclusters_[ind] = new_subcluster1;
-    xt::row(this->init_centroids_, ind) = new_subcluster1->centroid_;
+    auto it = std::find(subclusters_.begin(), subclusters_.end(), subcluster);
+    if (it != subclusters_.end()) {
+        int ind = std::distance(subclusters_.begin(), it);
+        this->subclusters_[ind] = new_subcluster1;
+        xt::row(this->init_centroids_, ind) = new_subcluster1->centroid_;
+    }
     this->centroids_ = xt::view(this->init_centroids_, xt::range(0, this->n_samples + 1), xt::all());
     this->append_subcluster(new_subcluster2);
 }
@@ -50,6 +53,7 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
     int closest_index = xt::argmin(dist_matrix)();
     _CFSubcluster* closest_subcluster = this->subclusters_[closest_index];
 
+    int num_subclusters = this->subclusters_.size();
     // If the subcluster has a child, we need a recursive strategy.
     if (closest_subcluster->child_ != nullptr) {
         bool split_child = closest_subcluster->child_->insert_cf_subcluster(subcluster);
@@ -80,7 +84,7 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
                 new_subcluster2
             );
 
-            if (this->subclusters_.size() > this->branching_factor) {
+            if (num_subclusters > this->branching_factor) {
                 return true;
             }
             return false;
@@ -98,7 +102,7 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
 
         // not close to any other subclusters, and we still
         // have space, so add.
-        else if (this->subclusters_.size() < this->branching_factor) {
+        else if (num_subclusters < this->branching_factor) {
             this->append_subcluster(subcluster);
             return false;
         }
@@ -110,4 +114,8 @@ bool _CFNode::insert_cf_subcluster(_CFSubcluster* subcluster) {
             return true;
         }
     }
+}
+
+_CFNode::~_CFNode() {
+
 }

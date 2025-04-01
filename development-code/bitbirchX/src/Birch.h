@@ -141,7 +141,8 @@ class Birch {
         int _n_features_out;
 
         Birch(float threshold=0.5, int branching_factor=50, int n_clusters=3, bool compute_labels=true, bool copy=true);
-        Birch fit(xt::xarray<float> X, void* y=NULL);
-        Birch _fit(xt::xarray<float> X, bool partial);
+        Birch fit(const xt::xarray<float>& X, void* y=NULL);
+        Birch _fit(const xt::xarray<float>& X, bool partial);
         std::vector<_CFNode*> _get_leaves();
+        ~Birch();
 };

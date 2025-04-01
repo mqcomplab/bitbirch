@@ -73,4 +73,5 @@ class _CFNode {
         void append_subcluster(_CFSubcluster* subcluster);
         void update_split_subclusters(_CFSubcluster* subcluster, _CFSubcluster* new_subcluster1, _CFSubcluster* new_subcluster2);
         bool insert_cf_subcluster(_CFSubcluster* subcluster);
+        ~_CFNode();
 }; 

@@ -56,7 +56,8 @@ class _CFSubcluster {
         std::vector<int> mol_indices;
         _CFNode* child_;
         
-        _CFSubcluster(xt::xarray<float> linear_sum = xt::empty<float>({0}), std::vector<int> mol_indices = {});
+        _CFSubcluster(const xt::xarray<float>& linear_sum = xt::empty<float>({0}), const std::vector<int>& mol_indices = {});
         void update(_CFSubcluster* subcluster);
         bool merge_subcluster(_CFSubcluster* nominee_cluster, double threshold);
+        ~_CFSubcluster();
 };

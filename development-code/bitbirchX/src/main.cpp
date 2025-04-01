@@ -3,16 +3,17 @@
 #include "_CFSubcluster.h"
 #include "_CFNode.h"
 #include <xtensor/xnpy.hpp> // for testing
+#include <filesystem>
 
 int main() {
     // Simple example running random sets with 1000 to 50000 molecules
     std::string z;
-    for (int n = 1000; n < 2001; n += 1000) {
+    for (int n = 1000; n < 10001; n += 1000) {
         std::cout << n << std::endl;
         // xt::random::seed(0); // for testing
-        auto dat = xt::random::randint<int>({n, 100}, 0, 2);
-        // std::string filename = "../bitbirch/development-code/bitbirchX/random_data_" + std::to_string(n) + ".npy";
-        // xt::xarray<int64_t> dat = xt::load_npy<int64_t>(filename);
+        // auto dat = xt::random::randint<int>({n, 2048}, 0, 2);
+        std::string filename = "development-code/bitbirchX/src/random_data_" + std::to_string(n) + ".npy";
+        xt::xarray<int64_t> dat = xt::load_npy<int64_t>(filename);
         // std::cout << dat << std::endl;
         auto brc = Birch(0.50, 50);
         auto v = std::chrono::high_resolution_clock::now();

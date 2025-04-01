@@ -56,10 +56,10 @@ std::tuple<std::pair<int, int>, xt::xarray<float>, xt::xarray<float>> max_separa
     xt::xarray<float> a_med = xt::linalg::dot(X, med); // numerator of the tanimoto between the centroid and every data point (1D vector)
     xt::xarray<float> sims_med = a_med / (xt::sum(med) + pop_counts - a_med);
     int mol1 = xt::argmin(sims_med)[0];
-    xt::xarray<float> a_mol1 = xt::linalg::dot(X, xt::view(X, mol1, xt::all()));
+    xt::xarray<float> a_mol1 = xt::linalg::dot(X, xt::row(X, mol1));
     xt::xarray<float> sims_mol1 = a_mol1 / (xt::view(pop_counts, mol1, xt::all()) + pop_counts - a_mol1);
     int mol2 = xt::argmin(sims_mol1)[0];
-    xt::xarray<float> a_mol2 = xt::linalg::dot(X, xt::view(X, mol2, xt::all()));
+    xt::xarray<float> a_mol2 = xt::linalg::dot(X, xt::row(X, mol2));
     xt::xarray<float> sims_mol2 = a_mol2 / (xt::view(pop_counts, mol2, xt::all()) + pop_counts - a_mol2);
     return make_tuple(std::make_pair(mol1, mol2), 1 - sims_mol1, 1 - sims_mol2);
 

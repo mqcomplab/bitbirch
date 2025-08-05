@@ -19,3 +19,6 @@ eggs/
 *.egg
 wheels/
 share/python-wheels/
+
+# Notebooks
+.ipynb_checkpoints

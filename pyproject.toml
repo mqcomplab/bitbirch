@@ -1,0 +1,35 @@
+[project]
+name = "bitbirch"
+license = "GPL-3.0-only"
+description = "BitBirch: efficient clustering of large molecular libraries."
+requires-python = ">=3.8"
+version = "0.2"
+dependencies = [
+    "numpy<2,>=1.20",
+    "matplotlib",
+    "pandas",
+    "rdkit",
+    "scipy",
+    "seaborn",
+    "scikit-learn",
+    "plotly",
+    "iSIM @ git+https://github.com/mqcomplab/iSIM.git",
+    "useful_rdkit_utils @ git+https://github.com/PatWalters/useful_rdkit_utils.git"
+]
+readme = "README.md"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"]}
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+homepage = "https://github.com/mqcomplab/bitbirch.git"
+repository = "https://github.com/mqcomplab/bitbirch.git"
+documentation = "https://github.com/mqcomplab/bitbirch.git"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bitbirch*"]

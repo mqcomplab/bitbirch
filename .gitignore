@@ -1,3 +1,21 @@
 *.npy
 *.pkl
 *.txt
+
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
+# Setuptools-scm file
+_version.py
+
+# Distribution / packaging
+build/
+dist/
+sdist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+wheels/
+share/python-wheels/

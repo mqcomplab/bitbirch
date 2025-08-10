@@ -26,8 +26,11 @@
 ###          Joel Nothman <joel.nothman@gmail.com>
 ### License: BSD 3 clause
 
+import time
 import numpy as np
 from scipy import sparse
+from sklearn.cluster import AgglomerativeClustering, KMeans
+from sklearn.metrics import pairwise_distances_argmin
 
 def jt_distances(X):
     """Calculates the matrix of Tanimoto distances
@@ -439,6 +442,9 @@ class BitBirch():
     subcluster_labels_ : ndarray
         Labels assigned to the centroids of the subclusters after
         they are clustered globally.
+    
+    labels_ : ndarray of shape (n_samples,)
+        Array of labels assigned to the input data.
 
     Notes
     -----
@@ -464,6 +470,8 @@ class BitBirch():
         n_clusters=3,
         compute_labels=True,
         copy=True,
+        perform_clustering=False,
+        clustering_type=""
     ):
         self.threshold = threshold
         self.branching_factor = branching_factor
@@ -472,6 +480,8 @@ class BitBirch():
         self.copy = copy
         self.index_tracker = 0
         self.first_call = True
+        self.perform_clustering = perform_clustering
+        self.clustering_type = clustering_type
 
     def fit(self, X, y=None):
         """
@@ -557,8 +567,8 @@ class BitBirch():
         self.subcluster_centers_ = centroids
         self._n_features_out = self.subcluster_centers_.shape[0]
         
-        # TODO: Incorporate global_clustering option
-        #self._global_clustering(X)
+        if(self.perform_clustering):
+            self._global_clustering(X)
         self.first_call = False
         return self
 
@@ -581,3 +591,26 @@ class BitBirch():
     def retrieveVal(self):
         print()
 
+    def _global_clustering(self, X):
+        """
+        Global clustering for the subclusters obtained after fitting
+        """
+        clusters = self.n_clusters
+        centroids = self.subcluster_centers_
+        clustering_type = self.clustering_type
+        compute_labels = (X is not None) and self.compute_labels
+
+        if clustering_type == "kmeans" and isinstance(clusters, int):
+            clusterer = KMeans(n_clusters=clusters)
+            self.subcluster_labels_ = clusterer.fit_predict(centroids)
+        elif clustering_type == "hierarchical" and isinstance(clusters, int):
+            clusterer = AgglomerativeClustering(n_clusters=clusters)
+            self.subcluster_labels_ = clusterer.fit_predict(centroids)
+        else:
+            # n_clusters is None and/or clustering_type == "" (skip global clustering)
+            self.subcluster_labels_ = np.arange(len(centroids))
+            return
+
+        if compute_labels:
+            argmin = pairwise_distances_argmin(X, centroids)
+            self.labels_ = self.subcluster_labels_[argmin]

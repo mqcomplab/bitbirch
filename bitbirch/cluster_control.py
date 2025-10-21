@@ -129,12 +129,12 @@ def chi(clusters, reps = False, rep_type = "centroid", curated = False, min_size
                 rep = clust[medoid]
             distances = 1 - jt_one_to_many(rep, clust)
             wcss += np.dot(distances, distances)
-            bcss += n_samples * jt_pair(c, rep)**2
+            bcss += n_samples * (1 - jt_pair(c, rep))**2
     else:
         for i, clust in enumerate(clusters):
             n_samples = len(clust)
             n += n_samples
-            bcss += n_samples * jt_pair(c, reps[i])**2
+            bcss += n_samples * (1 - jt_pair(c, reps[i]))**2
             distances = 1 - jt_one_to_many(reps[i], clust)
             wcss += np.dot(distances, distances)
     
